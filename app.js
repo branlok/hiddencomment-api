@@ -39,7 +39,7 @@ app.use(
       path: "/",
          sameSite: 'none', //this needs to be removed for local
       httpOnly: true,
-         secure: false, //this needs to be remove for local
+         secure: true, //this needs to be remove for local
       maxAge: 303 * 24 * 60 * 60 * 1000,
     },
   })
