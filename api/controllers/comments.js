@@ -48,9 +48,22 @@ async function deleteVideoComment(req, res) {
 }
 
 async function getUserComments(req, res) {
-  let comments = await getUserAllComments(req.session.uid);
-  console.log(comments);
-  res.status(200).json(comments.rows); // no limit right now.
+  let { page, size } = req.query;
+  if (!page) {
+    page = 1;
+  }
+  if (!size) {
+    size = 10;
+  }
+
+  let limit = parseInt(size);
+  let offset = (page - 1) * size;
+  let comments = await getUserAllComments(req.session.uid, { limit, offset });
+  if (comments.rowCount == 0) {
+    return res.status(200).json({ message: "noComments" });
+  } else if (comments.rowCount > 0) {
+    res.status(200).json(comments.rows); // no limit right now.
+  }
 }
 
 module.exports = {

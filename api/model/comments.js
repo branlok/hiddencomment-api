@@ -3,15 +3,15 @@ const db = require("../../db");
 
 exports.getComments = async function (videoId, paginationOption) {
   return await db.query(
-    "SELECT comments.*, username  FROM comments INNER JOIN users ON comments.user_id = users.user_id WHERE video_id = $1 AND reply_to IS NULL ORDER BY comments.created_on desc LIMIT $2 OFFSET $3 ;",
+    "SELECT comments.*, username  FROM comments INNER JOIN users ON comments.user_id = users.user_id WHERE video_id = $1 AND reply_to IS NULL ORDER BY comments.created_on desc LIMIT $2 OFFSET $3;",
     [videoId, paginationOption.limit, paginationOption.offset]
   );
 };
 
-exports.getUserAllComments = async function (userID) {
+exports.getUserAllComments = async function (userID, paginationOption) {
   return await db.query(
-    "SELECT comments.*, users.username FROM comments INNER JOIN users ON comments.user_id = users.user_id WHERE comments.user_id = $1 ORDER BY comments.created_on desc",
-    [userID]
+    "SELECT comments.*, videos.thumbnail, videos.title, users.username FROM comments INNER JOIN users ON comments.user_id = users.user_id INNER JOIN videos ON comments.video_id = videos.video_id WHERE comments.user_id = $1 ORDER BY comments.created_on desc LIMIT $2 OFFSET $3;;",
+    [userID, paginationOption.limit, paginationOption.offset]
   );
 };
 

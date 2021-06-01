@@ -32,7 +32,7 @@ exports.getVideoRecord = async function (videoID) {
 exports.listRecentlyAdded = async function (videoID) {
   try {
     //check constraints
-    return await db.query("SELECT * FROM videos ORDER BY created_on desc LIMIT 10;");
+    return await db.query("SELECT * FROM videos ORDER BY created_on desc LIMIT 15;");
   } catch (err) {
     console.log("selectUser Error:", err);
   }
