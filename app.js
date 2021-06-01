@@ -14,6 +14,7 @@ var cors = require("cors");
 
 const app = express();
 
+app.set('trust proxy', 1)
 // (async () => {
 //   console.log(db.query("SELECT * FROM users;"));
 // })();
@@ -37,9 +38,9 @@ app.use(
     saveUninitialized: false,
     cookie: {
       path: "/",
-         sameSite: 'none', //this needs to be removed for local
+      sameSite: "none", //this needs to be removed for local
       httpOnly: true,
-         secure: true, //this needs to be remove for local
+      secure: true, //this needs to be remove for local
       maxAge: 303 * 24 * 60 * 60 * 1000,
     },
   })
