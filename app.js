@@ -36,13 +36,26 @@ app.use(
     secret: "secret",
     resave: false,
     saveUninitialized: false,
-    cookie: {
-      path: "/",
-      sameSite: "none", //this needs to be removed for local
-      httpOnly: true,
-      secure: true, //this needs to be remove for local
-      maxAge: 303 * 24 * 60 * 60 * 1000,
-    },
+    cookie: process.env.DATABASE_URL ? {
+        path: "/",
+        sameSite: "none", //this needs to be removed for local
+        httpOnly: true,
+        secure: true, //this needs to be remove for local
+        maxAge: 303 * 24 * 60 * 60 * 1000,
+      } : {
+        path: "/",
+        // sameSite: "none", //this needs to be removed for local
+        httpOnly: true,
+        // secure: true, //this needs to be remove for local
+        maxAge: 303 * 24 * 60 * 60 * 1000,
+      },
+    // cookie: {
+    //   path: "/",
+    //   sameSite: "none", //this needs to be removed for local
+    //   httpOnly: true,
+    //   secure: true, //this needs to be remove for local
+    //   maxAge: 303 * 24 * 60 * 60 * 1000,
+    // },
   })
 );
 
