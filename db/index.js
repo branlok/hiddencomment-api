@@ -1,7 +1,7 @@
 require("dotenv").config();
 const { Pool } = require("pg");
 
-if (process.env.NODE_ENV == 'development') 
+// if (process.env.NODE_ENV == 'development') 
 
 const pool = new Pool({
   connectionString:

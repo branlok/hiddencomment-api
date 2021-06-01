@@ -21,7 +21,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: "https://stoic-nightingale-8bf870.netlify.app",
+    origin: process.env.DATABASE_URL ? "https://stoic-nightingale-8bf870.netlify.app" : true,
     credentials: true,
     optionsSuccessStatus: 200,
   })
