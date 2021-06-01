@@ -20,7 +20,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: true,
+    origin: "https://stoic-nightingale-8bf870.netlify.app/",
     credentials: true,
     optionsSuccessStatus: 200,
   })
